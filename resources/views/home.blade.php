@@ -5,12 +5,15 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section style="position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;">
+    <section id="hero-section" style="position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;">
         <div style="position:absolute;inset:0;z-index:0;">
-            <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;">
-                <source src="{{ asset('images/vid.mp4') }}" type="video/mp4">
+            <!-- Poster image shows instantly while video loads -->
+            <img id="hero-poster" src="{{ asset('images/hero-poster.png') }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;transition:opacity 1s ease;">
+            <!-- Video loads lazily in background -->
+            <video id="hero-video" muted loop playsinline preload="none" style="width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease;" poster="{{ asset('images/hero-poster.png') }}">
+                <source data-src="{{ asset('images/vid.mp4') }}" type="video/mp4">
             </video>
-            <div style="position:absolute;inset:0;background:rgba(0,0,0,0.4);"></div>
+            <div style="position:absolute;inset:0;background:rgba(0,0,0,0.4);z-index:2;"></div>
         </div>
         <div class="container" style="position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding-top:80px;padding-bottom:80px;">
             <div style="max-width:800px;">
@@ -174,4 +177,34 @@
             </div>
         </div>
     </section>
+    
+    @push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('hero-video');
+            const poster = document.getElementById('hero-poster');
+            if (video && poster) {
+                const source = video.querySelector('source');
+                if (source && source.dataset.src) {
+                    source.src = source.dataset.src;
+                    video.load();
+                    
+                    // When video has loaded the first frame
+                    video.addEventListener('loadeddata', () => {
+                        video.play().then(() => {
+                            // Smoothly transition from poster to video
+                            video.style.opacity = '1';
+                            setTimeout(() => {
+                                poster.style.opacity = '0';
+                            }, 1000);
+                        }).catch(err => {
+                            console.log("Autoplay prevented or failed:", err);
+                        });
+                    }, { once: true });
+                }
+            }
+        });
+    </script>
+    @endpush
 @endsection
+
