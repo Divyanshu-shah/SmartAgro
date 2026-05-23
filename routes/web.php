@@ -20,6 +20,7 @@ Route::get('/test-mail', function () {
         'username' => config('mail.mailers.smtp.username'),
         'password' => config('mail.mailers.smtp.password') ? '***SET (length: ' . strlen(config('mail.mailers.smtp.password')) . ')***' : 'NOT SET',
         'scheme' => config('mail.mailers.smtp.scheme'),
+        'resend_key' => config('services.resend.key') ? '***SET (length: ' . strlen(config('services.resend.key')) . ')***' : 'NOT SET',
         'from_address' => config('mail.from.address'),
         'from_name' => config('mail.from.name'),
     ];
