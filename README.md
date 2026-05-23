@@ -1,58 +1,470 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🌾 SmartAgro — Intelligent Crop & Pesticide Management Platform
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <strong>A modern web application for smart agriculture — empowering farmers with crop protection knowledge, pesticide identification, and agricultural resources.</strong>
 </p>
 
-## About Laravel
+<p align="center">
+  <img src="https://img.shields.io/badge/Laravel-13.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel 13" />
+  <img src="https://img.shields.io/badge/PHP-8.4-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.4" />
+  <img src="https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-4.0-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="TailwindCSS" />
+  <img src="https://img.shields.io/badge/Vite-8.0-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
+</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📖 Table of Contents
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- [About the Project](#-about-the-project)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Project Structure](#-project-structure)
+- [Prerequisites](#-prerequisites)
+- [Installation & Setup](#-installation--setup)
+- [Environment Variables](#-environment-variables)
+- [Running Locally](#-running-locally)
+- [Deployment](#-deployment)
+  - [Railway](#railway)
+  - [Render](#render)
+- [Database Schema](#-database-schema)
+- [API Routes](#-api-routes)
+- [Email Notifications](#-email-notifications)
+- [Contributing](#-contributing)
+- [License](#-license)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🌱 About the Project
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**SmartAgro** is a comprehensive agricultural management platform built with Laravel 13 and MongoDB. It provides farmers and agricultural enthusiasts with essential tools for crop protection, pesticide identification, and access to agricultural resources.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+The platform focuses on four major crop categories — **Rice**, **Wheat**, **Corn**, and **Vegetables** — offering detailed information about pesticides, detection methods, organic alternatives, and best practices for sustainable farming.
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## ✨ Features
 
-```bash
-composer require laravel/boost --dev
+### 🔐 Authentication System
+- User registration with secure password hashing (bcrypt)
+- Login with email & password
+- "Remember Me" functionality
+- Session-based authentication with CSRF protection
+- Guest & authenticated route middleware
 
-php artisan boost:install
+### 🌿 Crop Protection Guides
+Detailed crop-specific information for:
+| Crop | Pesticides Covered | Methods |
+|------|-------------------|---------|
+| 🌾 **Rice** | Chlorpyrifos, Carbofuran, Malathion | Detection Methods (HPLC, GC-MS, Biosensors) |
+| 🌾 **Wheat** | Glyphosate, 2,4-D, Dicamba | Safe Alternatives (IPM, Biological Controls) |
+| 🌽 **Corn** | Atrazine, Metolachlor, Acetochlor | Residue Analysis (QuEChERS, LC-MS/MS) |
+| 🥬 **Vegetables** | Imidacloprid, Cypermethrin, Mancozeb | Organic Solutions (Neem Oil, Bt, Companion Planting) |
+
+### 🔬 Pesticide Identification System
+- Submit pest problem details with crop type and symptoms
+- Upload up to 5 images (JPEG, PNG, GIF, WebP — max 5MB each)
+- Form data stored in MongoDB for tracking
+- Automatic email notification to the admin team
+
+### 📬 Contact System
+- Contact form with name, email, phone, subject, and message
+- Data persisted in MongoDB
+- Email notification sent to admin on submission
+
+### 📰 Newsletter Subscription
+- Email-based newsletter signup
+- Subscriber data stored in MongoDB
+
+### 📚 Agricultural Resources
+- Curated collection of farming resources and guides
+- Educational content on sustainable agriculture
+
+### 🛠 Services
+- Overview of agricultural services offered by the platform
+
+---
+
+## 🧰 Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| **Backend Framework** | Laravel 13.x |
+| **Language** | PHP 8.4 |
+| **Database** | MongoDB Atlas (via `mongodb/laravel-mongodb` v5.7) |
+| **Frontend Build** | Vite 8.0 |
+| **CSS Framework** | Tailwind CSS 4.0 |
+| **Templating** | Blade Templates |
+| **Email** | SMTP (Gmail) via Laravel Mail |
+| **Authentication** | Laravel built-in Auth (session-based) |
+| **Containerization** | Docker (PHP 8.4-cli) |
+| **Deployment** | Railway / Render |
+
+---
+
+## 📁 Project Structure
+
+```
+SmartAgro/
+├── app/
+│   ├── Http/
+│   │   └── Controllers/
+│   │       ├── AuthController.php          # Login, Register, Logout
+│   │       ├── ContactController.php       # Contact form handling
+│   │       ├── CropController.php          # Crop protection data
+│   │       ├── HomeController.php          # Landing page
+│   │       ├── IdentificationController.php # Pesticide ID form
+│   │       ├── NewsletterController.php    # Newsletter subscription
+│   │       ├── ResourceController.php      # Agricultural resources
+│   │       └── ServiceController.php       # Services page
+│   ├── Mail/
+│   │   ├── ContactFormMail.php             # Contact email template
+│   │   └── IdentificationFormMail.php      # Pest ID email template
+│   ├── Models/
+│   │   ├── Contact.php                     # MongoDB: contacts collection
+│   │   ├── Newsletter.php                  # MongoDB: newsletters collection
+│   │   ├── PesticideRequest.php            # MongoDB: pesticide_requests collection
+│   │   └── User.php                        # MongoDB: users collection
+│   └── Providers/
+│       └── AppServiceProvider.php          # HTTPS forcing in production
+├── bootstrap/
+│   └── app.php                             # App bootstrap & proxy trust config
+├── config/
+│   └── database.php                        # MongoDB connection config
+├── resources/
+│   └── views/
+│       ├── auth/
+│       │   ├── login.blade.php             # Login page
+│       │   └── register.blade.php          # Registration page
+│       ├── emails/
+│       │   ├── contact.blade.php           # Contact email template
+│       │   └── identification.blade.php    # Pest ID email template
+│       ├── layouts/
+│       │   └── app.blade.php               # Main layout template
+│       ├── contact.blade.php               # Contact page
+│       ├── crop.blade.php                  # Crop detail page
+│       ├── home.blade.php                  # Home/landing page
+│       ├── identification.blade.php        # Pest identification form
+│       ├── resources.blade.php             # Resources page
+│       ├── services.blade.php              # Services page
+│       └── welcome.blade.php               # Welcome page
+├── routes/
+│   └── web.php                             # All web routes
+├── Dockerfile                              # Production Docker config
+├── .dockerignore                           # Docker build exclusions
+├── composer.json                           # PHP dependencies
+├── package.json                            # Node.js dependencies
+└── vite.config.js                          # Vite build configuration
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## 📋 Prerequisites
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Before setting up the project, ensure you have the following installed:
 
-## Code of Conduct
+- **PHP** ≥ 8.4
+- **Composer** ≥ 2.x
+- **Node.js** ≥ 20.x & **npm**
+- **MongoDB PHP Extension** (`ext-mongodb`)
+- **MongoDB Atlas** account (or local MongoDB instance)
+- **Git**
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## 🚀 Installation & Setup
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 1. Clone the Repository
 
-## License
+```bash
+git clone https://github.com/Divyanshu-shah/SmartAgro.git
+cd SmartAgro
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 2. Install PHP Dependencies
+
+```bash
+composer install
+```
+
+### 3. Install Node.js Dependencies
+
+```bash
+npm install
+```
+
+### 4. Configure Environment
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+Edit `.env` with your configuration (see [Environment Variables](#-environment-variables) below).
+
+### 5. Build Frontend Assets
+
+```bash
+# Development (with hot reload)
+npm run dev
+
+# Production
+npm run build
+```
+
+### 6. Start the Development Server
+
+```bash
+php artisan serve
+```
+
+The application will be available at `http://localhost:8000`
+
+### Quick Setup (All-in-One)
+
+```bash
+composer setup
+```
+
+This runs `composer install`, copies `.env`, generates app key, runs migrations, installs npm packages, and builds assets.
+
+---
+
+## 🔑 Environment Variables
+
+Create a `.env` file in the project root with the following variables:
+
+```env
+# Application
+APP_NAME=SmartAgro
+APP_ENV=local
+APP_KEY=                          # Generated by: php artisan key:generate
+APP_DEBUG=true
+APP_URL=http://localhost:8000
+
+# Database (MongoDB Atlas)
+DB_CONNECTION=mongodb
+MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/?appName=<appName>
+DB_DATABASE=SmartAgro
+
+# Session & Cache
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+CACHE_STORE=file
+QUEUE_CONNECTION=sync
+
+# Mail (Gmail SMTP)
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=your-email@gmail.com
+MAIL_PASSWORD="your-app-password"       # Use Gmail App Password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=your-email@gmail.com
+MAIL_FROM_NAME=SmartAgro
+
+# Vite
+VITE_APP_NAME=SmartAgro
+```
+
+> **Note:** For Gmail, you need to generate an [App Password](https://myaccount.google.com/apppasswords) (requires 2-Step Verification enabled).
+
+---
+
+## 💻 Running Locally
+
+### Development Mode (Recommended)
+
+Run the full dev stack with hot reloading:
+
+```bash
+composer dev
+```
+
+This concurrently starts:
+- 🌐 Laravel server (`php artisan serve`)
+- 📋 Queue listener (`php artisan queue:listen`)
+- 📜 Log viewer (`php artisan pail`)
+- ⚡ Vite dev server (`npm run dev`)
+
+### Individual Commands
+
+```bash
+# Start only the Laravel server
+php artisan serve
+
+# Start only the Vite dev server
+npm run dev
+
+# Run tests
+composer test
+```
+
+---
+
+## 🚀 Deployment
+
+The project includes a `Dockerfile` for containerized deployment, required because:
+- Laravel 13 + Symfony 8.x requires **PHP 8.4** (most platforms default to 8.3)
+- The MongoDB PHP extension (`ext-mongodb`) must be installed via PECL
+
+### Railway
+
+1. Push your code to GitHub
+2. Go to [Railway](https://railway.com) → **New Project** → **Deploy from GitHub**
+3. Select the `SmartAgro` repository
+4. Railway auto-detects the `Dockerfile`
+5. Add environment variables in the **Variables** tab:
+
+```env
+APP_NAME=SmartAgro
+APP_ENV=production
+APP_KEY=base64:your-generated-key
+APP_DEBUG=false
+APP_URL=https://your-app.up.railway.app
+DB_CONNECTION=mongodb
+MONGODB_URI=mongodb+srv://...
+DB_DATABASE=SmartAgro
+SESSION_DRIVER=file
+CACHE_STORE=file
+QUEUE_CONNECTION=sync
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=your-email@gmail.com
+MAIL_PASSWORD=your-app-password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=your-email@gmail.com
+MAIL_FROM_NAME=SmartAgro
+VITE_APP_NAME=SmartAgro
+```
+
+6. Go to **Settings** → **Networking** → **Generate Domain**
+7. Update `APP_URL` with the generated domain
+
+### Render
+
+1. Push your code to GitHub
+2. Go to [Render](https://render.com) → **New** → **Web Service**
+3. Connect your GitHub repo
+4. Set **Environment** to **Docker**
+5. Add the same environment variables as above
+6. Click **Deploy**
+
+---
+
+## 🗃 Database Schema
+
+All data is stored in **MongoDB Atlas** (NoSQL). Collections:
+
+### `users`
+| Field | Type | Description |
+|-------|------|-------------|
+| `_id` | ObjectId | Auto-generated |
+| `name` | String | Full name |
+| `email` | String | Unique email |
+| `password` | String | Bcrypt hashed |
+| `remember_token` | String | Session token |
+| `created_at` | DateTime | Timestamp |
+| `updated_at` | DateTime | Timestamp |
+
+### `contacts`
+| Field | Type | Description |
+|-------|------|-------------|
+| `_id` | ObjectId | Auto-generated |
+| `name` | String | Sender name |
+| `email` | String | Sender email |
+| `phone` | String | Optional phone |
+| `subject` | String | Message subject |
+| `message` | String | Message body |
+| `created_at` | DateTime | Timestamp |
+
+### `pesticide_requests`
+| Field | Type | Description |
+|-------|------|-------------|
+| `_id` | ObjectId | Auto-generated |
+| `name` | String | Farmer name |
+| `email` | String | Farmer email |
+| `phone` | String | Optional phone |
+| `farm_size` | Number | Farm size (acres) |
+| `crop_type` | String | Type of crop |
+| `pest_problem` | String | Description of pest |
+| `symptoms` | String | Observed symptoms |
+| `pesticide_used` | String | Previously used pesticide |
+| `images` | Array | Uploaded image filenames |
+| `created_at` | DateTime | Timestamp |
+
+### `newsletters`
+| Field | Type | Description |
+|-------|------|-------------|
+| `_id` | ObjectId | Auto-generated |
+| `email` | String | Subscriber email |
+| `created_at` | DateTime | Timestamp |
+
+---
+
+## 🛣 API Routes
+
+### Public Routes
+| Method | URI | Controller | Description |
+|--------|-----|------------|-------------|
+| `GET` | `/` | `HomeController@index` | Landing page |
+| `GET` | `/contact` | `ContactController@index` | Contact page |
+| `POST` | `/contact` | `ContactController@store` | Submit contact form |
+
+### Guest-Only Routes (redirects if logged in)
+| Method | URI | Controller | Description |
+|--------|-----|------------|-------------|
+| `GET` | `/login` | `AuthController@showLogin` | Login page |
+| `POST` | `/login` | `AuthController@login` | Authenticate user |
+| `GET` | `/register` | `AuthController@showRegister` | Register page |
+| `POST` | `/register` | `AuthController@register` | Create account |
+
+### Protected Routes (requires authentication)
+| Method | URI | Controller | Description |
+|--------|-----|------------|-------------|
+| `POST` | `/logout` | `AuthController@logout` | Logout user |
+| `GET` | `/services` | `ServiceController@index` | Services page |
+| `GET` | `/identification` | `IdentificationController@index` | Pest ID form |
+| `POST` | `/identification` | `IdentificationController@store` | Submit pest ID |
+| `GET` | `/resources` | `ResourceController@index` | Resources page |
+| `GET` | `/crops/{slug}` | `CropController@show` | Crop details (rice/wheat/corn/vege) |
+| `POST` | `/newsletter` | `NewsletterController@store` | Subscribe to newsletter |
+
+---
+
+## 📧 Email Notifications
+
+The app sends automated email notifications via **Gmail SMTP**:
+
+1. **Contact Form Submission** (`ContactFormMail`)
+   - Triggered when a visitor submits the contact form
+   - Contains: name, email, phone, subject, message
+
+2. **Pesticide Identification Request** (`IdentificationFormMail`)
+   - Triggered when a user submits the pest identification form
+   - Contains: farmer details, crop type, symptoms, uploaded images as attachments
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+---
+
+<p align="center">
+  Made with ❤️ by <a href="https://github.com/Divyanshu-shah">Divyanshu Shah</a>
+</p>
