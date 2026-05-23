@@ -5,11 +5,16 @@
 </p>
 
 <p align="center">
+  <a href="https://smartagro-production.up.railway.app/">🌐 <strong>Live Demo: smartagro-production.up.railway.app</strong></a>
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/Laravel-13.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel 13" />
   <img src="https://img.shields.io/badge/PHP-8.4-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.4" />
   <img src="https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
   <img src="https://img.shields.io/badge/Tailwind_CSS-4.0-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="TailwindCSS" />
   <img src="https://img.shields.io/badge/Vite-8.0-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
+  <img src="https://img.shields.io/website?url=https%3A%2F%2Fsmaragro-production.up.railway.app&style=for-the-badge&label=Status" alt="Website Status" />
 </p>
 
 ---
