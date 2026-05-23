@@ -67,8 +67,9 @@ class IdentificationController extends Controller
                     imagePaths: $fullPaths,
                 ));
         } catch (\Exception $e) {
-            // Log the error but don't fail the form submission
             \Log::error('Failed to send identification email: ' . $e->getMessage());
+            return redirect()->route('identification')
+                ->with('success', 'Request saved but email failed: ' . $e->getMessage());
         }
 
         return redirect()->route('identification')

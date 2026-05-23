@@ -38,8 +38,9 @@ class ContactController extends Controller
                     contactMessage: $validated['message'],
                 ));
         } catch (\Exception $e) {
-            // Log the error but don't fail the form submission
             \Log::error('Failed to send contact email: ' . $e->getMessage());
+            return redirect()->route('contact')
+                ->with('success', 'Your message was saved but email failed: ' . $e->getMessage());
         }
 
         return redirect()->route('contact')
