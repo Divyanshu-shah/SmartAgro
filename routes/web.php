@@ -9,6 +9,38 @@ use App\Http\Controllers\CropController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NewsletterController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
+
+// Temporary diagnostic route - REMOVE after fixing mail
+Route::get('/test-mail', function () {
+    $config = [
+        'mailer' => config('mail.default'),
+        'host' => config('mail.mailers.smtp.host'),
+        'port' => config('mail.mailers.smtp.port'),
+        'username' => config('mail.mailers.smtp.username'),
+        'password' => config('mail.mailers.smtp.password') ? '***SET (length: ' . strlen(config('mail.mailers.smtp.password')) . ')***' : 'NOT SET',
+        'scheme' => config('mail.mailers.smtp.scheme'),
+        'from_address' => config('mail.from.address'),
+        'from_name' => config('mail.from.name'),
+    ];
+
+    try {
+        Mail::raw('Test email from SmartAgro on Railway!', function($message) {
+            $message->to('shahdivyanshu5009@gmail.com')
+                    ->subject('SmartAgro Railway Mail Test');
+        });
+        return response()->json([
+            'status' => 'SUCCESS - Mail sent!',
+            'config' => $config,
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'FAILED',
+            'error' => $e->getMessage(),
+            'config' => $config,
+        ], 500);
+    }
+});
 
 // Auth routes
 Route::middleware('guest')->group(function () {
