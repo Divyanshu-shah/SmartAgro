@@ -3,6 +3,112 @@
 @section('title', 'Home')
 @section('meta_description', 'SmartAgro - Intelligent crop monitoring and pesticide analysis platform. Safeguard your fields with data-driven insights and sustainable farming practices.')
 
+@push('styles')
+<style>
+    @media (max-width: 768px) {
+        /* Hero */
+        #hero-section h1 { font-size: 2.8rem !important; }
+        #hero-section p { font-size: 16px !important; }
+        #hero-section .container { padding-top: 60px !important; padding-bottom: 60px !important; }
+
+        /* Crop Protection Cards - 2 col to 1 col */
+        #hero-section ~ section:nth-of-type(1) .container > div:last-child {
+            grid-template-columns: 1fr !important;
+            gap: 24px !important;
+        }
+        #hero-section ~ section:nth-of-type(1) .container > div:last-child > div {
+            grid-template-columns: 1fr !important;
+        }
+        #hero-section ~ section:nth-of-type(1) .container > div:last-child > div > div:last-child {
+            padding: 24px !important;
+        }
+
+        /* Technology Section */
+        #services .container > div {
+            grid-template-columns: 1fr !important;
+            gap: 40px !important;
+        }
+        #services h2 { font-size: 2rem !important; }
+
+        /* Process Timeline - 2 col to 1 col */
+        #services ~ section:nth-of-type(1) .container > div:last-child {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+        }
+
+        /* Safety Spotlight */
+        #resources .container > div {
+            grid-template-columns: 1fr !important;
+        }
+        #resources .container > div > div:last-child {
+            padding: 28px 24px !important;
+        }
+
+        /* Testimonials - 3 col to 1 col */
+        #resources ~ section .container > div:last-child {
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
+        }
+    }
+
+    @media (max-width: 640px) {
+        /* Hero text further scaling */
+        #hero-section h1 { font-size: 2.2rem !important; }
+        #hero-section p { font-size: 15px !important; max-width: 100% !important; }
+        #hero-section .container { padding-top: 40px !important; padding-bottom: 40px !important; }
+
+        /* Hero badge */
+        #hero-section .anim-slide-up:first-child span {
+            font-size: 11px !important;
+            letter-spacing: 0.5px !important;
+        }
+        #hero-section .anim-slide-up:first-child {
+            padding: 8px 16px !important;
+        }
+
+        /* Hero buttons stack vertically */
+        #hero-section .anim-d3 {
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 12px !important;
+        }
+        #hero-section .anim-d3 a {
+            width: 100% !important;
+            max-width: 320px;
+            justify-content: center !important;
+            padding: 14px 28px !important;
+            font-size: 15px !important;
+        }
+
+        /* Section headings */
+        section h2 { font-size: 1.8rem !important; }
+
+        /* Section padding */
+        section { padding: 48px 0 !important; }
+
+        /* Crop card text */
+        #hero-section ~ section:nth-of-type(1) h3 { font-size: 1.3rem !important; }
+        #hero-section ~ section:nth-of-type(1) .container > div:last-child > div > div:last-child {
+            padding: 20px !important;
+        }
+
+        /* Process step cards */
+        #services ~ section:nth-of-type(1) .container > div:last-child > div {
+            padding: 20px !important;
+            gap: 16px !important;
+        }
+
+        /* Safety Spotlight */
+        #resources h3 { font-size: 1.4rem !important; }
+    }
+
+    @media (max-width: 480px) {
+        #hero-section { min-height: 80vh !important; }
+        #hero-section h1 { font-size: 1.9rem !important; }
+    }
+</style>
+@endpush
+
 @section('content')
     <!-- Hero Section -->
     <section id="hero-section" style="position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;">

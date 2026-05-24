@@ -5,6 +5,7 @@
 <style>
     .contact-cards-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:48px; }
     .contact-main-grid { display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:start; }
+
     @media(max-width:900px) {
         .contact-cards-grid { grid-template-columns:1fr; }
         .contact-main-grid { grid-template-columns:1fr; }
@@ -12,11 +13,43 @@
     @media(min-width:601px) and (max-width:900px) {
         .contact-cards-grid { grid-template-columns:repeat(2,1fr); }
     }
+
+    @media (max-width: 768px) {
+        /* Hero */
+        .contact-hero h1 { font-size: 2.2rem !important; }
+        .contact-hero p { font-size: 15px !important; }
+        .contact-hero { padding: 80px 0 60px !important; }
+
+        /* Form grid */
+        .contact-form-grid {
+            grid-template-columns: 1fr !important;
+        }
+
+        /* Branch offices grid */
+        .contact-offices-grid {
+            grid-template-columns: 1fr !important;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .contact-hero h1 { font-size: 1.8rem !important; }
+        .contact-hero { padding: 70px 0 50px !important; }
+        section { padding: 40px 0 !important; }
+        section h2 { font-size: 1.6rem !important; }
+
+        /* FAQ section */
+        .contact-faq button {
+            padding: 14px 16px !important;
+        }
+        .contact-faq button h3 {
+            font-size: 14px !important;
+        }
+    }
 </style>
 @endpush
 
 @section('content')
-<section style="position:relative;padding:100px 0 80px;overflow:hidden;">
+<section class="contact-hero" style="position:relative;padding:100px 0 80px;overflow:hidden;">
     <img src="{{ asset('images/contact-hero.jpg') }}" alt="Agricultural farmland" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
     <div style="position:absolute;inset:0;background:rgba(0,0,0,0.4);"></div>
     <div class="container" style="position:relative;z-index:1;text-align:center;">
@@ -77,7 +110,7 @@
                             <label for="name" style="display:block;font-size:13px;font-weight:600;color:var(--clr-text);margin-bottom:6px;">Full Name *</label>
                             <input type="text" id="name" name="name" value="{{ old('name') }}" required placeholder="Your full name" style="width:100%;padding:12px 16px;border:1.5px solid #e5e7eb;border-radius:12px;font-size:14px;background:#fafafa;outline:none;transition:all .3s;box-sizing:border-box;font-family:var(--font-body);" onfocus="this.style.borderColor='var(--clr-emerald)';this.style.background='#fff';this.style.boxShadow='0 0 0 4px rgba(45,106,79,.08)'" onblur="this.style.borderColor='#e5e7eb';this.style.background='#fafafa';this.style.boxShadow='none'">
                         </div>
-                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;">
+                        <div class="contact-form-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;">
                             <div>
                                 <label for="email" style="display:block;font-size:13px;font-weight:600;color:var(--clr-text);margin-bottom:6px;">Email *</label>
                                 <input type="email" id="email" name="email" value="{{ old('email') }}" required placeholder="you@example.com" style="width:100%;padding:12px 16px;border:1.5px solid #e5e7eb;border-radius:12px;font-size:14px;background:#fafafa;outline:none;transition:all .3s;box-sizing:border-box;font-family:var(--font-body);" onfocus="this.style.borderColor='var(--clr-emerald)';this.style.background='#fff';this.style.boxShadow='0 0 0 4px rgba(45,106,79,.08)'" onblur="this.style.borderColor='#e5e7eb';this.style.background='#fafafa';this.style.boxShadow='none'">
@@ -116,7 +149,7 @@
             <div class="reveal" style="animation-delay:.15s;">
                 <div style="margin-bottom:28px;">
                     <h3 style="font-size:16px;font-weight:700;color:var(--clr-forest);margin:0 0 16px;display:flex;align-items:center;gap:8px;"><i class="fas fa-building" style="color:var(--clr-emerald);font-size:14px;"></i> Branch Offices</h3>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                    <div class="contact-offices-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
                         @foreach([['name'=>'North Zone Lab','loc'=>'XXXXXXXX','phone'=>'+91 7878787878'],['name'=>'International Desk','loc'=>'XXXXX, XXXXX','phone'=>'+971 555 1234']] as $office)
                         <div style="background:#fff;border:1px solid rgba(0,0,0,.04);border-radius:14px;padding:18px;transition:all .3s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,.06)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
                             <h4 style="margin:0 0 6px;font-size:14px;font-weight:600;color:var(--clr-forest);">{{ $office['name'] }}</h4>
@@ -152,7 +185,7 @@
             <h2 style="font-family:var(--font-heading);font-size:2rem;color:var(--clr-forest);margin:0 0 8px;">Frequently Asked Questions</h2>
             <p style="font-size:14px;color:var(--clr-muted);margin:0;">Answers to the queries we hear most often.</p>
         </div>
-        <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="contact-faq" style="display:flex;flex-direction:column;gap:12px;">
             @foreach([
                 ['q'=>'How soon will I hear back after submitting a form?','a'=>'Our team aims to respond within one working day. For time-sensitive issues, call our helpline for immediate assistance.'],
                 ['q'=>'What details help you diagnose my crop issue faster?','a'=>'Include the crop variety, growth stage, recent spray history, and clear photographs of affected plant parts.'],

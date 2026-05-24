@@ -53,6 +53,104 @@
         .nav-link { padding:8px 18px; border-radius:50px; font-size:14px; font-weight:500; text-decoration:none; transition:all .25s; color:var(--clr-text); }
         .nav-link:hover { background:rgba(93,214,44,.1); }
         .nav-link.active { background:var(--clr-leaf) !important; color:#fff !important; }
+
+        /* ==========================================
+           RESPONSIVE / MOBILE STYLES
+           ========================================== */
+
+        /* --- Tablet (≤ 1024px) --- */
+        @media (max-width: 1024px) {
+            .container { padding: 0 20px; }
+        }
+
+        /* --- Small Tablet / Large Phone (≤ 768px) --- */
+        @media (max-width: 768px) {
+
+            /* Footer */
+            .footer-grid {
+                grid-template-columns: 1fr !important;
+                gap: 40px !important;
+            }
+            .footer-links-grid {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 24px !important;
+            }
+            footer h2 {
+                font-size: 2.2rem !important;
+            }
+            .footer-bottom {
+                flex-direction: column !important;
+                align-items: center !important;
+                text-align: center;
+            }
+
+            /* Chatbot */
+            #chatbot-box {
+                width: calc(100vw - 32px) !important;
+                max-width: 360px !important;
+                height: 480px !important;
+                right: 0;
+            }
+
+            /* Navbar adjustments */
+            #main-nav {
+                width: 96% !important;
+                padding: 10px 18px !important;
+                top: 10px !important;
+            }
+        }
+
+        /* --- Phone (≤ 640px) --- */
+        @media (max-width: 640px) {
+            .container { padding: 0 16px; }
+
+            /* Footer */
+            footer {
+                padding: 48px 0 0 !important;
+            }
+            .footer-links-grid {
+                grid-template-columns: 1fr !important;
+            }
+            footer h2 {
+                font-size: 1.8rem !important;
+            }
+            footer h2 br { display: none; }
+
+            /* Chatbot full-width on small phones */
+            #chatbot-container {
+                right: 8px !important;
+                bottom: 16px !important;
+            }
+            #chatbot-box {
+                width: calc(100vw - 16px) !important;
+                max-width: none !important;
+                height: 70vh !important;
+                max-height: 520px;
+            }
+
+            /* Flash messages */
+            #flash-message, #newsletter-flash {
+                left: 16px !important;
+                right: 16px !important;
+                max-width: none !important;
+            }
+
+            /* Navbar */
+            #main-nav {
+                width: 97% !important;
+                padding: 8px 14px !important;
+                border-radius: 20px !important;
+                top: 8px !important;
+            }
+            #nav-brand {
+                font-size: 18px !important;
+            }
+        }
+
+        /* --- Small Phone (≤ 480px) --- */
+        @media (max-width: 480px) {
+            .container { padding: 0 12px; }
+        }
     </style>
     @stack('styles')
 </head>
@@ -132,7 +230,7 @@
         <div style="position:absolute;top:-60px;right:-60px;width:300px;height:300px;background:rgba(93,214,44,.08);border-radius:50%;"></div>
         <div style="position:absolute;bottom:-40px;left:-40px;width:200px;height:200px;background:rgba(232,168,48,.06);border-radius:50%;"></div>
         <div class="container" style="position:relative;z-index:1;">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;padding-bottom:40px;">
+            <div class="footer-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;padding-bottom:40px;">
                 <div>
                     <h2 style="font-family:var(--font-heading);font-size:3.5rem;color:#fff;margin:0 0 24px;line-height:1.1;">Nurturing every acre, <br><span style="color:var(--clr-gold);font-style:italic;">sustainably.</span></h2>
                     <p style="font-size:16px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:32px;max-width:400px;">Empowering growers with intelligent crop diagnostics, chemical safety insights, and bio-friendly alternatives for a resilient agricultural future.</p>
@@ -142,7 +240,7 @@
                         <a href="http://www.linkedin.com/in/aditya-singh-a98775291" style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;transition:all .3s;" onmouseover="this.style.background='var(--clr-emerald)';this.style.transform='translateY(-4px)'" onmouseout="this.style.background='rgba(255,255,255,.1)';this.style.transform='none'"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;">
+                <div class="footer-links-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:40px;">
                     <div>
                         <h4 style="font-family:var(--font-body);font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--clr-mint);margin-bottom:24px;">Explore</h4>
                         <ul style="list-style:none;display:flex;flex-direction:column;gap:16px;padding:0;margin:0;">
@@ -162,7 +260,7 @@
                     </div>
                 </div>
             </div>
-            <div style="border-top:1px solid rgba(255,255,255,.08);margin-top:56px;padding:24px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+            <div class="footer-bottom" style="border-top:1px solid rgba(255,255,255,.08);margin-top:56px;padding:24px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
                 <p style="font-size:13px;color:rgba(255,255,255,.4);">© {{ date('Y') }} SmartAgro. All rights reserved.</p>
                 <div style="display:flex;gap:24px;">
                     <a href="#" style="font-size:13px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.4)'">Privacy Policy</a>

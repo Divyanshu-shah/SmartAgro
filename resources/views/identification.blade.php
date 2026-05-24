@@ -1,7 +1,55 @@
 @extends('layouts.app')
 @section('title', 'Pesticide Identification')
+
+@push('styles')
+<style>
+    @media (max-width: 768px) {
+        /* Hero */
+        .ident-hero h1 { font-size: 2.2rem !important; }
+        .ident-hero p { font-size: 15px !important; }
+        .ident-hero { padding: 80px 0 60px !important; }
+
+        /* Form grid - 2 col to 1 col */
+        .ident-form-grid {
+            grid-template-columns: 1fr !important;
+        }
+
+        /* Form card */
+        .ident-form-card {
+            border-radius: 16px !important;
+        }
+        .ident-form-header {
+            padding: 20px 24px !important;
+        }
+        .ident-form-body {
+            padding: 24px !important;
+        }
+
+        /* Diagnostic Journey - 3 col to 1 col */
+        .ident-journey-grid {
+            grid-template-columns: 1fr !important;
+            gap: 24px !important;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .ident-hero h1 { font-size: 1.8rem !important; }
+        .ident-hero { padding: 70px 0 50px !important; }
+        section { padding: 48px 0 !important; }
+
+        .ident-form-header {
+            padding: 18px 20px !important;
+        }
+        .ident-form-header h2 { font-size: 1.2rem !important; }
+        .ident-form-body {
+            padding: 20px !important;
+        }
+    }
+</style>
+@endpush
+
 @section('content')
-<section style="position:relative;padding:100px 0 80px;overflow:hidden;">
+<section class="ident-hero" style="position:relative;padding:100px 0 80px;overflow:hidden;">
     <img src="{{ asset('images/identification-hero.jpg') }}" alt="Crop field for pesticide identification" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
     <div style="position:absolute;inset:0;background:rgba(0,0,0,0.4);"></div>
     <div class="container" style="position:relative;z-index:1;text-align:center;">
@@ -13,12 +61,12 @@
 
 <section style="padding:80px 0;background:var(--clr-sand);">
     <div class="container">
-        <div class="reveal" style="max-width:780px;margin:0 auto;background:#fff;border-radius:24px;overflow:hidden;border:1px solid rgba(0,0,0,.04);box-shadow:var(--shadow-md);">
-            <div style="background:linear-gradient(135deg,var(--clr-forest),var(--clr-emerald));padding:28px 36px;">
+        <div class="reveal ident-form-card" style="max-width:780px;margin:0 auto;background:#fff;border-radius:24px;overflow:hidden;border:1px solid rgba(0,0,0,.04);box-shadow:var(--shadow-md);">
+            <div class="ident-form-header" style="background:linear-gradient(135deg,var(--clr-forest),var(--clr-emerald));padding:28px 36px;">
                 <h2 style="font-family:var(--font-heading);font-size:1.5rem;color:#fff;margin:0 0 4px;">Diagnostic Intake Form</h2>
                 <p style="font-size:14px;color:rgba(255,255,255,.6);margin:0;">Provide your field details below and our lab team will begin the assessment.</p>
             </div>
-            <div style="padding:36px;">
+            <div class="ident-form-body" style="padding:36px;">
                 @if(session('success'))
                 <div style="padding:14px 18px;background:#eefde4;border:1px solid #93e86e;border-radius:12px;margin-bottom:24px;display:flex;align-items:center;gap:10px;">
                     <i class="fas fa-check-circle" style="color:var(--clr-emerald);"></i>
@@ -32,7 +80,7 @@
                 @endif
                 <form action="{{ route('identification.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
+                    <div class="ident-form-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
                         <div>
                             <label for="name" style="display:block;font-size:13px;font-weight:600;color:var(--clr-text);margin-bottom:6px;">Full Name *</label>
                             <input type="text" id="name" name="name" value="{{ old('name') }}" required style="width:100%;padding:12px 16px;border:1.5px solid #e5e7eb;border-radius:12px;font-size:14px;background:#fafafa;outline:none;transition:all .3s;box-sizing:border-box;font-family:var(--font-body);" onfocus="this.style.borderColor='var(--clr-emerald)';this.style.background='#fff';this.style.boxShadow='0 0 0 4px rgba(45,106,79,.08)'" onblur="this.style.borderColor='#e5e7eb';this.style.background='#fafafa';this.style.boxShadow='none'">
@@ -42,7 +90,7 @@
                             <input type="email" id="email" name="email" value="{{ old('email') }}" required style="width:100%;padding:12px 16px;border:1.5px solid #e5e7eb;border-radius:12px;font-size:14px;background:#fafafa;outline:none;transition:all .3s;box-sizing:border-box;font-family:var(--font-body);" onfocus="this.style.borderColor='var(--clr-emerald)';this.style.background='#fff';this.style.boxShadow='0 0 0 4px rgba(45,106,79,.08)'" onblur="this.style.borderColor='#e5e7eb';this.style.background='#fafafa';this.style.boxShadow='none'">
                         </div>
                     </div>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
+                    <div class="ident-form-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
                         <div>
                             <label for="phone" style="display:block;font-size:13px;font-weight:600;color:var(--clr-text);margin-bottom:6px;">Phone Number</label>
                             <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" style="width:100%;padding:12px 16px;border:1.5px solid #e5e7eb;border-radius:12px;font-size:14px;background:#fafafa;outline:none;transition:all .3s;box-sizing:border-box;font-family:var(--font-body);" onfocus="this.style.borderColor='var(--clr-emerald)';this.style.background='#fff';this.style.boxShadow='0 0 0 4px rgba(45,106,79,.08)'" onblur="this.style.borderColor='#e5e7eb';this.style.background='#fafafa';this.style.boxShadow='none'">
@@ -133,7 +181,7 @@
             <span style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--clr-emerald);display:block;margin-bottom:12px;">After You Submit</span>
             <h2 style="font-family:var(--font-heading);font-size:2.3rem;color:var(--clr-forest);margin:0;">Your Diagnostic Journey</h2>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;max-width:900px;margin:0 auto;">
+        <div class="ident-journey-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;max-width:900px;margin:0 auto;">
             @foreach([
                 ['icon'=>'fa-envelope','color'=>'#4ab821','bg'=>'#eefde4','title'=>'Acknowledgement Notice','desc'=>'A confirmation with your unique case reference number arrives within minutes.'],
                 ['icon'=>'fa-clipboard-list','color'=>'#7c3aed','bg'=>'#f5f3ff','title'=>'Collection Guidance','desc'=>'If physical samples are needed, we send step-by-step packaging and shipping instructions.'],
