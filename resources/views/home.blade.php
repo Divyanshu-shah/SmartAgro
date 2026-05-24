@@ -12,40 +12,46 @@
         #hero-section .container { padding-top: 60px !important; padding-bottom: 60px !important; }
 
         /* Crop Protection Cards - 2 col to 1 col */
-        #hero-section ~ section:nth-of-type(1) .container > div:last-child {
+        .crop-grid {
             grid-template-columns: 1fr !important;
             gap: 24px !important;
         }
-        #hero-section ~ section:nth-of-type(1) .container > div:last-child > div {
+        .crop-card {
             grid-template-columns: 1fr !important;
         }
-        #hero-section ~ section:nth-of-type(1) .container > div:last-child > div > div:last-child {
+        .crop-card-img-wrap {
+            height: 240px !important;
+        }
+        .crop-card-content {
             padding: 24px !important;
         }
 
         /* Technology Section */
-        #services .container > div {
+        .services-grid {
             grid-template-columns: 1fr !important;
             gap: 40px !important;
         }
         #services h2 { font-size: 2rem !important; }
 
         /* Process Timeline - 2 col to 1 col */
-        #services ~ section:nth-of-type(1) .container > div:last-child {
+        .timeline-grid {
             grid-template-columns: 1fr !important;
             gap: 20px !important;
         }
 
         /* Safety Spotlight */
-        #resources .container > div {
+        .spotlight-grid {
             grid-template-columns: 1fr !important;
         }
-        #resources .container > div > div:last-child {
+        .spotlight-img-wrap {
+            height: 260px !important;
+        }
+        .spotlight-content {
             padding: 28px 24px !important;
         }
 
         /* Testimonials - 3 col to 1 col */
-        #resources ~ section .container > div:last-child {
+        .testimonials-grid {
             grid-template-columns: 1fr !important;
             gap: 16px !important;
         }
@@ -87,13 +93,13 @@
         section { padding: 48px 0 !important; }
 
         /* Crop card text */
-        #hero-section ~ section:nth-of-type(1) h3 { font-size: 1.3rem !important; }
-        #hero-section ~ section:nth-of-type(1) .container > div:last-child > div > div:last-child {
+        .crop-card h3 { font-size: 1.3rem !important; }
+        .crop-card-content {
             padding: 20px !important;
         }
 
         /* Process step cards */
-        #services ~ section:nth-of-type(1) .container > div:last-child > div {
+        .timeline-grid > div {
             padding: 20px !important;
             gap: 16px !important;
         }
@@ -153,18 +159,18 @@
                 <span style="display:inline-block;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--clr-emerald);margin-bottom:12px;">Field Intelligence</span>
                 <h2 style="font-family:var(--font-heading);font-size:2.5rem;color:var(--clr-forest);margin:0;">Safeguarding India's Staple Crops</h2>
             </div>
-            <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:40px;">
+            <div class="crop-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:40px;">
                 @foreach([
                     ['img'=>'rice.jpeg','name'=>'Paddy Shield','desc'=>'Triazophos, Monocrotophos, Phorate','slug'=>'rice','link'=>'Residue Monitoring'],
                     ['img'=>'wheat.jpeg','name'=>'Wheat Guard','desc'=>'Chlorpyrifos, Pendimethalin, Sulfosulfuron','slug'=>'wheat','link'=>'Green Alternatives'],
                     ['img'=>'corn.jpeg','name'=>'Maize Defense','desc'=>'Fipronil, Thiamethoxam, Tembotrione','slug'=>'corn','link'=>'Exposure Reports'],
                     ['img'=>'vege.jpeg','name'=>'Horticulture Care','desc'=>'Profenofos, Triazophos, Hexaconazole','slug'=>'vege','link'=>'Bio-Control Options']
                 ] as $i => $crop)
-                <div class="reveal" style="animation-delay:{{ $i * 0.1 }}s;background:#fff;border-radius:24px;overflow:hidden;border:1px solid rgba(0,0,0,.04);transition:all .4s cubic-bezier(.4,0,.2,1);cursor:pointer;display:grid;grid-template-columns:1fr 1.2fr;" onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 20px 50px rgba(0,0,0,.1)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
-                    <div style="height:100%;overflow:hidden;position:relative;">
+                <div class="crop-card reveal" style="animation-delay:{{ $i * 0.1 }}s;background:#fff;border-radius:24px;overflow:hidden;border:1px solid rgba(0,0,0,.04);transition:all .4s cubic-bezier(.4,0,.2,1);cursor:pointer;display:grid;grid-template-columns:1fr 1.2fr;" onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 20px 50px rgba(0,0,0,.1)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
+                    <div class="crop-card-img-wrap" style="height:100%;overflow:hidden;position:relative;">
                         <img src="{{ asset('images/' . $crop['img']) }}" alt="{{ $crop['name'] }}" style="width:100%;height:100%;object-fit:cover;transition:transform .6s;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='none'">
                     </div>
-                    <div style="padding:40px;">
+                    <div class="crop-card-content" style="padding:40px;">
                         <h3 style="font-family:var(--font-heading);font-size:1.6rem;color:var(--clr-forest);margin:0 0 12px;">{{ $crop['name'] }}</h3>
                         <p style="font-size:14px;color:var(--clr-muted);line-height:1.7;margin:0 0 24px;">Frequently detected chemicals: {{ $crop['desc'] }}. Our platform maps contamination patterns across growing regions.</p>
                         <a href="{{ route('crop.show', $crop['slug']) }}" style="font-size:14px;font-weight:700;color:var(--clr-emerald);text-decoration:none;display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:50px;background:var(--clr-cream);transition:all .3s;" onmouseover="this.style.background='var(--clr-emerald)';this.style.color='#fff'" onmouseout="this.style.background='var(--clr-cream)';this.style.color='var(--clr-emerald)'">{{ $crop['link'] }} <i class="fas fa-arrow-right" style="font-size:12px;"></i></a>
@@ -178,7 +184,7 @@
     <!-- Technology Section -->
     <section id="services" style="padding:100px 0;background:#fff;">
         <div class="container">
-            <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:center;">
+            <div class="services-grid" style="display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:center;">
                 <div class="reveal">
                     <div style="position:relative;">
                         <img src="{{ asset('images/ai-technology.jpg') }}" alt="AI Technology" style="width:100%;border-radius:20px;box-shadow:var(--shadow-lg);">
@@ -214,7 +220,7 @@
                 <span style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--clr-emerald);margin-bottom:12px;display:block;">Our Workflow</span>
                 <h2 style="font-family:var(--font-heading);font-size:2.5rem;color:var(--clr-forest);margin:0;">From Field Sample to Actionable Insight</h2>
             </div>
-            <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:40px;max-width:900px;margin:0 auto;position:relative;">
+            <div class="timeline-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:40px;max-width:900px;margin:0 auto;position:relative;">
                 @foreach([
                     ['icon'=>'fa-camera','title'=>'Capture & Upload','desc'=>'Photograph affected leaves or collect a soil sample and upload through our secure portal.'],
                     ['icon'=>'fa-flask','title'=>'Diagnostic Testing','desc'=>'Automated GC-MS and LC-MS/MS workflows screen for 400+ active ingredients simultaneously.'],
@@ -239,11 +245,11 @@
     <!-- Safety Spotlight -->
     <section id="resources" style="padding:80px 0;background:#fff;">
         <div class="container">
-            <div class="reveal" style="max-width:1000px;margin:0 auto;background:var(--clr-sand);border-radius:24px;overflow:hidden;border:1px solid rgba(0,0,0,.04);display:grid;grid-template-columns:1fr 1.2fr;">
-                <div style="overflow:hidden;">
+            <div class="spotlight-grid reveal" style="max-width:1000px;margin:0 auto;background:var(--clr-sand);border-radius:24px;overflow:hidden;border:1px solid rgba(0,0,0,.04);display:grid;grid-template-columns:1fr 1.2fr;">
+                <div class="spotlight-img-wrap" style="overflow:hidden;">
                     <img src="{{ asset('images/ind1.jpeg') }}" alt="Pesticide safety" style="width:100%;height:100%;object-fit:cover;">
                 </div>
-                <div style="padding:48px 40px;">
+                <div class="spotlight-content" style="padding:48px 40px;">
                     <span style="display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--clr-gold);background:rgba(221,161,94,.1);padding:4px 12px;border-radius:6px;margin-bottom:16px;">Advisory Notice</span>
                     <h3 style="font-family:var(--font-heading);font-size:1.8rem;color:var(--clr-forest);margin:0 0 16px;">Organophosphate Exposure Warning</h3>
                     <p style="font-size:14px;color:var(--clr-muted);line-height:1.7;margin:0 0 24px;">Emerging research highlights long-term neurological and endocrine risks from prolonged organophosphate contact. Several compounds have faced regulatory restrictions across the EU and Southeast Asia.</p>
@@ -265,7 +271,7 @@
                 <span style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--clr-mint);margin-bottom:12px;display:block;">Community Voices</span>
                 <h2 style="font-family:var(--font-heading);font-size:2.5rem;color:#fff;margin:0;">Stories From the Field</h2>
             </div>
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+            <div class="testimonials-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
                 @foreach([
                     ['img'=>'ind2.jpeg','name'=>'Vikram Patel','role'=>'Organic Grower, Gujarat','text'=>'SmartAgro\'s residue mapping revealed contamination drifting from a neighbouring field. We adjusted buffer zones and my organic certification stayed intact.','stars'=>5],
                     ['img'=>'ind3.webp','name'=>'Sunil Yadav','role'=>'Export Farmer, Maharashtra','text'=>'Clearing EU MRL thresholds used to take weeks of back-and-forth with labs. Now I get pre-export compliance reports in under two days.','stars'=>5],
