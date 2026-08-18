@@ -32,15 +32,12 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 
 WORKDIR /app
 
-COPY composer.json composer.lock ./
-RUN composer install --no-interaction --prefer-dist --no-progress --optimize-autoloader --no-dev
-
-COPY package.json package-lock.json* vite.config.js ./
-RUN npm install
-
+# Copy the full application before Composer runs, because Laravel's post-install
+# scripts require artisan.php and the rest of the app bootstrapping files.
 COPY . .
 
-RUN composer dump-autoload --optimize \
+RUN composer install --no-interaction --prefer-dist --no-progress --optimize-autoloader --no-dev \
+    && npm install \
     && npm run build \
     && mkdir -p storage/framework/cache/data \
         storage/framework/sessions \
