@@ -102,8 +102,7 @@ Detailed crop-specific information for:
 | **Templating** | Blade Templates |
 | **Email** | SMTP (Gmail) via Laravel Mail |
 | **Authentication** | Laravel built-in Auth (session-based) |
-| **Containerization** | Docker (PHP 8.4-cli) |
-| **Deployment** | Railway / Render |
+| **Hosting** | Render |
 
 ---
 
@@ -155,11 +154,10 @@ SmartAgro/
 │       └── welcome.blade.php               # Welcome page
 ├── routes/
 │   └── web.php                             # All web routes
-├── Dockerfile                              # Production Docker config
-├── .dockerignore                           # Docker build exclusions
 ├── composer.json                           # PHP dependencies
 ├── package.json                            # Node.js dependencies
-└── vite.config.js                          # Vite build configuration
+├── vite.config.js                          # Vite build configuration
+└── .env.example                            # Environment template
 ```
 
 ---
@@ -309,24 +307,25 @@ composer test
 
 ## 🚀 Deployment
 
-The project includes a `Dockerfile` for containerized deployment, required because:
-- Laravel 13 + Symfony 8.x requires **PHP 8.4** (most platforms default to 8.3)
-- The MongoDB PHP extension (`ext-mongodb`) must be installed via PECL
+This project remains a single Laravel application and is designed to run on Render without Docker.
 
-### Railway
+### Render (Laravel-only)
 
-1. Push your code to GitHub
-2. Go to [Railway](https://railway.com) → **New Project** → **Deploy from GitHub**
-3. Select the `SmartAgro` repository
-4. Railway auto-detects the `Dockerfile`
-5. Add environment variables in the **Variables** tab:
+1. Push the project to GitHub.
+2. In [Render](https://render.com), create a **Web Service** and connect this repository.
+3. Use the following settings:
+   - Build Command: `composer install --no-interaction --prefer-dist --no-progress --optimize-autoloader --no-dev && npm install && npm run build && php artisan config:cache && php artisan route:cache && php artisan view:cache`
+   - Start Command: `php artisan serve --host 0.0.0.0 --port $PORT`
+   - Node.js version: 20+
+4. Add the production environment variables below.
+5. Deploy the service and copy the live Render URL.
 
 ```env
 APP_NAME=SmartAgro
 APP_ENV=production
 APP_KEY=base64:your-generated-key
 APP_DEBUG=false
-APP_URL=https://your-app.up.railway.app
+APP_URL=https://your-render-app.onrender.com
 DB_CONNECTION=mongodb
 MONGODB_URI=mongodb+srv://...
 DB_DATABASE=SmartAgro
@@ -344,17 +343,7 @@ MAIL_FROM_NAME=SmartAgro
 VITE_APP_NAME=SmartAgro
 ```
 
-6. Go to **Settings** → **Networking** → **Generate Domain**
-7. Update `APP_URL` with the generated domain
-
-### Render
-
-1. Push your code to GitHub
-2. Go to [Render](https://render.com) → **New** → **Web Service**
-3. Connect your GitHub repo
-4. Set **Environment** to **Docker**
-5. Add the same environment variables as above
-6. Click **Deploy**
+> This is a Laravel-only deployment. There is no separate frontend or Docker setup.
 
 ---
 
