@@ -1,5 +1,0 @@
-[phases.custom_php]
-dependsOn = ['setup']
-cmds = [
-  'PHP_INI_PATH=$(php --ini | grep "Additional .ini files parsed:" | cut -d: -f2 | tr -d " "); mkdir -p "$PHP_INI_PATH"; printf "upload_max_filesize = 50M\npost_max_size = 55M\nmemory_limit = 256M\n" > "$PHP_INI_PATH/custom.ini"'
-]
