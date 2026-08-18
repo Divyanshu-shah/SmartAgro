@@ -307,18 +307,16 @@ composer test
 
 ## 🚀 Deployment
 
-This project remains a single Laravel application and is designed to run on Render without Docker.
+This project is configured for a Docker-based Laravel deployment on Render.
 
-### Render (Laravel-only)
+### Render (Docker)
 
 1. Push the project to GitHub.
 2. In [Render](https://render.com), create a **Web Service** and connect this repository.
-3. Use the following settings:
-   - Build Command: `composer install --no-interaction --prefer-dist --no-progress --optimize-autoloader --no-dev && npm install && npm run build && php artisan config:cache && php artisan route:cache && php artisan view:cache`
-   - Start Command: `php artisan serve --host 0.0.0.0 --port $PORT`
-   - Node.js version: 20+
-4. Add the production environment variables below.
-5. Deploy the service and copy the live Render URL.
+3. Set the runtime to **Docker**.
+4. Render will use the included [Dockerfile](Dockerfile).
+5. Add the production environment variables below.
+6. Deploy and copy the live Render URL.
 
 ```env
 APP_NAME=SmartAgro
@@ -332,18 +330,14 @@ DB_DATABASE=SmartAgro
 SESSION_DRIVER=file
 CACHE_STORE=file
 QUEUE_CONNECTION=sync
-MAIL_MAILER=smtp
-MAIL_HOST=smtp.gmail.com
-MAIL_PORT=587
-MAIL_USERNAME=your-email@gmail.com
-MAIL_PASSWORD=your-app-password
-MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS=your-email@gmail.com
+MAIL_MAILER=resend
+MAIL_FROM_ADDRESS=onboarding@resend.dev
 MAIL_FROM_NAME=SmartAgro
+RESEND_API_KEY=your_resend_api_key
 VITE_APP_NAME=SmartAgro
 ```
 
-> This is a Laravel-only deployment. There is no separate frontend or Docker setup.
+> This is a Laravel app deployed as a Docker container on Render.
 
 ---
 
